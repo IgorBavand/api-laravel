@@ -40,7 +40,14 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produto = new Produto;
+        $produto->nome = $request->input('nome');
+        $produto->descricao = $request->input('descricao');
+        $produto->preco = $request->input('preco');
+    
+        if( $produto->save() ){
+          return new ProdutoResource( $produto );
+        }
     }
 
     /**

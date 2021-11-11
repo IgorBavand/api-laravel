@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\AuthController;
+
 
 
 /*
@@ -21,5 +23,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('produtos', [ProdutoController::class, 'index']);
+//Route::get('produtos', [ProdutoController::class, 'index']);
+
+Route::post('salvar-produto', [ProdutoController::class, 'store']);
+
+Route::post('auth/login', [AuthController::class, 'login']);
+ 
+Route::middleware(['apiJWT'])->group(function () {
+    /** Informações do usuário logado */
+    Route::get('auth/me', [AuthController::class, 'me']); 
+    /** Encerra o acesso */
+    Route::get('auth/logout', [AuthController::class, 'logout']); 
+    /** Atualiza o token */
+    Route::get('auth/refresh', [AuthController::class, 'refresh']); 
+    /** Listagem dos usuarios cadastrados, este rota serve de teste para verificar a proteção feita pelo jwt */
+    Route::get('/users', [UserController::class, 'index']); 
+});
 
