@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Produto as Produto;
-use App\Http\Resources\ProdutoResource as ProdutoRes;
+use App\Models\User;
 
 
 class ProdutoController extends Controller
@@ -18,8 +17,7 @@ class ProdutoController extends Controller
     {
       
       
-     $produtos = Produto::paginate(15);
-    return ProdutoRes::collection($produtos);
+     return User::all();
     }
 
     /**
@@ -40,14 +38,7 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        $produto = new Produto;
-        $produto->nome = $request->input('nome');
-        $produto->descricao = $request->input('descricao');
-        $produto->preco = $request->input('preco');
-    
-        if( $produto->save() ){
-          return new ProdutoRes( $produto );
-        }
+      
     }
 
     /**
@@ -56,7 +47,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
     }
@@ -67,7 +58,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         //
     }
@@ -79,7 +70,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -90,7 +81,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         //
     }
