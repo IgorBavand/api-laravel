@@ -36,7 +36,11 @@ class User extends Authenticatable implements JWTSubject{
                 'id' => $this->id,
                 'name' => $this->name,
                 'email' => $this->email,
-            ]
+            ],
+            'authorization' => [
+                    'admin', 
+                    'vendedor',
+                 ]
         ];
     }
     /**
@@ -71,4 +75,11 @@ class User extends Authenticatable implements JWTSubject{
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function roles()
+
+    {
+
+        return $this->belongsToMany(Role::class, 'role_user');
+
+    }
 }
