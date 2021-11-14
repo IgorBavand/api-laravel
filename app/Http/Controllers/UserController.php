@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 
-class ProdutoController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class ProdutoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-      
-      
+    { 
      return User::all();
     }
 
@@ -58,7 +56,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(string $id)
     {
         //
     }
@@ -67,10 +65,10 @@ class ProdutoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -81,7 +79,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         //
     }
