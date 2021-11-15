@@ -7,6 +7,8 @@ use App\Models\Produto as Produto;
 use App\Http\Resources\ProdutoResource as ProdutoRes;
 use App\Models\User;
 use App\Models\Role;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 
 
@@ -24,12 +26,36 @@ class ProdutoController extends Controller
 
     $user = User::find("00e23586-7f63-4225-a905-a67087f0e748");
 
-    $roles = $user->roles;
+    $json = $user->roles;
        
-       return response()->json($roles);
-        //return($user->roles);
-      
-    // $produtos = Produto::paginate(15);
+       
+      // $token = JWTAuth::getToken();
+        //$apy = JWTAuth::getPayload($token)->toArray();
+
+        /*
+        $tokenParts = explode(".", $token);  
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtHeader = json_decode($tokenHeader);
+        $jwtPayload = json_decode($tokenPayload);
+       
+        echo $json = $jwtPayload->authorization->toArray();
+        */
+
+        echo $json;
+        /*
+    
+        foreach($json as $j){
+            echo $j->name;
+        }
+        */
+    
+   //      return response()->json($roles->name);
+    
+    
+    
+    
+        // $produtos = Produto::paginate(15);
     //return ProdutoRes::collection($produtos);
    
 

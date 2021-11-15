@@ -11,6 +11,10 @@ use App\Http\Traits\HasPrimaryKeyUuid;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
+
+
 class User extends Authenticatable implements JWTSubject{
     use HasApiTokens, HasFactory, Notifiable, HasPrimaryKeyUuid;
 
@@ -31,17 +35,32 @@ class User extends Authenticatable implements JWTSubject{
      */
     public function getJWTCustomClaims()
     {
+        
         return [
+            'sub' => $this->id,
             'user' => [
                 'id' => $this->id,
                 'name' => $this->name,
                 'email' => $this->email,
             ],
             'authorization' => [
-                    'admin', 
-                    'vendedor',
+                   $this->UserRoles()
+                    
                  ]
         ];
+    }
+
+    private function UserRoles(){
+        $user = User::find($this->id);
+        $allRoles = $user->roles;
+
+        $autorizacoes = array();
+        foreach($allRoles as $role){
+            array_unshift($autorizacoes, $role->name);
+            
+        }
+        return $autorizacoes;
+
     }
     /**
      * The attributes that are mass assignable.
