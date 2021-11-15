@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('auth/login', [AuthController::class, 'login']);
 
 
+Route::get('produtos', [ProdutoController::class, 'index']);
 
 Route::middleware(['apiJWT'])->group(function () {
     /** Informações do usuário logado */
@@ -45,7 +46,7 @@ Route::middleware(['apiJWT'])->group(function () {
 
 
     Route::post('salvar/produto', [ProdutoController::class, 'store']);
-    Route::get('produtos', [ProdutoController::class, 'index']);
+   
 
 
 });
