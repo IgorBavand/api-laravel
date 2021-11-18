@@ -9,8 +9,8 @@ use App\Models\User;
 use App\Models\Role;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
-
-
+use App\Http\Services;
+use App\Http\Services\ProdutoService;
 
 class ProdutoController extends Controller
 {
@@ -21,12 +21,12 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-
+        ProdutoService::salvarProduto();
         
 
-    $user = User::find("00e23586-7f63-4225-a905-a67087f0e748");
+    //$user = User::find("00e23586-7f63-4225-a905-a67087f0e748");
 
-    $json = $user->roles;
+    //$json = $user->roles;
        
        
       // $token = JWTAuth::getToken();
@@ -42,7 +42,7 @@ class ProdutoController extends Controller
         echo $json = $jwtPayload->authorization->toArray();
         */
 
-        echo $json;
+      //  echo $json;
         /*
     
         foreach($json as $j){
@@ -77,16 +77,11 @@ class ProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function salvarProduto(Request $request)
     {
-        $produto = new Produto;
-        $produto->nome = $request->input('nome');
-        $produto->descricao = $request->input('descricao');
-        $produto->preco = $request->input('preco');
-    
-        if( $produto->save() ){
-          return new ProdutoRes( $produto );
-        }
+
+        return ProdutoService::salvarProduto($request);
+
     }
 
     /**

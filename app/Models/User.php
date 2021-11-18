@@ -37,16 +37,21 @@ class User extends Authenticatable implements JWTSubject{
     {
         
         return [
-            'sub' => $this->id,
+            'sub' => $this->email,
+            'sub_id' => $this->id,
+            'sub_name' => $this->name,
+            /*
             'user' => [
                 'id' => $this->id,
                 'name' => $this->name,
                 'email' => $this->email,
             ],
+            
             'authorization' => [
                    $this->UserRoles()
                     
                  ]
+                 */
         ];
     }
 
@@ -60,7 +65,6 @@ class User extends Authenticatable implements JWTSubject{
             
         }
         return $autorizacoes;
-
     }
     /**
      * The attributes that are mass assignable.

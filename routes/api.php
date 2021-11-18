@@ -43,11 +43,8 @@ Route::middleware(['apiJWT'])->group(function () {
     Route::get('auth/refresh', [AuthController::class, 'refresh']); 
     /** Listagem dos usuarios cadastrados, este rota serve de teste para verificar a proteção feita pelo jwt */
     Route::get('users', [UserController::class, 'index']); 
-
-
-    Route::post('salvar/produto', [ProdutoController::class, 'store']);
+    //** salva um produto no banco de dados */
+    Route::post('salvar/produto', [ProdutoController::class, 'salvarProduto']);
    
-
-
 });
 
